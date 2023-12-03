@@ -16,11 +16,17 @@ fixture`Testing Teacher UI`
     
         await t.navigateTo("/");
     
-        const editedTeacherSelector = Selector('tr').withText('10003'); // Assuming '10003' is a unique identifier for the edited teacher
+        // Check the entire table content for debugging
+        const tableContent = await Selector('#teacher-table').innerText;
+        console.log(tableContent);
+    
+        // Adjust this selector based on the actual DOM structure
+        const editedTeacherSelector = Selector('td').withText('10003').parent('tr');
         const editedTeacherRow = await editedTeacherSelector.innerText;
     
         await t.expect(editedTeacherRow).contains("Changed Teacher Name");
     
         await t.click("#teacher-delete-10003");
     });
+    
     
